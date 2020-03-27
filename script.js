@@ -17,9 +17,19 @@ const runQuery = (numArticles, queryURL) => {
         numArticles =  parseInt(numArticles)
         log(typeof numArticles)
         for(let i = 0; i < numArticles; i++){
-            const responseDiv = $('<div>')
-            const headLine = $('<h3>').text(response.response.docs[i].headline.main)
-            responseDiv.append(headLine)
+            const responseDiv = $('<div>').addClass('space')
+            // const headLine = $('<h3>').text(response.response.docs[i].headline.main)
+            // responseDiv.append(headLine)
+            responseDiv.html(`<div class="card text-white bg-info mb-3" style="max-width: 80%;">
+            <div class="card-header">${response.response.docs[i].headline.main}
+            <p>${response.response.docs[i].byline.original}</p>
+            <p>${response.response.docs[i].pub_date}</p>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">${response.response.docs[i].section_name}</h5>
+              <p class="card-text">${response.response.docs[i].web_url}</p>
+            </div>
+          </div>`)
             $('#resultDiv').append(responseDiv)
         }
     })
