@@ -12,8 +12,16 @@ const runQuery = (numArticles, queryURL) => {
         url: queryURL,
         method: 'GET'
     }).then((response) => {
-        console.log(queryURL)
-        console.log(response)
+        log(queryURL)
+        log(response)
+        numArticles =  parseInt(numArticles)
+        log(typeof numArticles)
+        for(let i = 0; i < numArticles; i++){
+            const responseDiv = $('<div>')
+            const headLine = $('<h3>').text(response.response.docs[i].headline.main)
+            responseDiv.append(headLine)
+            $('#resultDiv').append(responseDiv)
+        }
     })
 }
 $('#searchBTN').on('click', (e) => {
@@ -22,6 +30,7 @@ $('#searchBTN').on('click', (e) => {
     let newURL = `${queryURLbase}&q=${searchTerm}`;
     const startYear = $('#startYear').val().trim();    
     const endYear = $('#endYear').val().trim();
+    let numArticles = $('#numRecords').val();
     
    
          
@@ -34,7 +43,7 @@ $('#searchBTN').on('click', (e) => {
 
     
     
-    runQuery(10, newURL)
+    runQuery(numArticles, newURL)
 
 })
 
