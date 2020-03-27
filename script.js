@@ -16,7 +16,9 @@ const runQuery = (numArticles, queryURL) => {
         log(response)
         numArticles =  parseInt(numArticles)
         log(typeof numArticles)
+        $('#resultDiv').empty()
         for(let i = 0; i < numArticles; i++){
+         
             const responseDiv = $('<div>').addClass('space')
             // const headLine = $('<h3>').text(response.response.docs[i].headline.main)
             // responseDiv.append(headLine)
@@ -27,7 +29,7 @@ const runQuery = (numArticles, queryURL) => {
             </div>
             <div class="card-body">
               <h5 class="card-title">${response.response.docs[i].section_name}</h5>
-              <p class="card-text">${response.response.docs[i].web_url}</p>
+              <p class="card-text"><a href=${response.response.docs[i].web_url}>Link to full article</a></p>
             </div>
           </div>`)
             $('#resultDiv').append(responseDiv)
